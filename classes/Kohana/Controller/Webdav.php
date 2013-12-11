@@ -34,9 +34,12 @@ class Kohana_Controller_Webdav extends Controller
 		// directory, if you're storing your data somewhere else.
 		$lock_backend = new DAV\Locks\Backend\File($lock_file);
 		$lock_plugin = new DAV\Locks\Plugin($lock_backend);
-		
 		$server->addPlugin($lock_plugin);
 		
+		// Support for html frontend
+		$browser = new DAV\Browser\Plugin();
+		$server->addPlugin($browser);
+
 		// All we need to do now, is to fire up the server
 		$server->exec();
 	}
