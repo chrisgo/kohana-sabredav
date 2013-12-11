@@ -4,7 +4,12 @@ kohana-sabredav
 Basic Kohana (3.3.1) module wrapping sabredav (1.8.7)
 
 * This is a work-in-progress
-* Only testing Webdav (for now) involving file transfer 
+* Only testing Webdav (for now) involving file transfer (using CyberDuck client)
+  * Upload (PUT) - does **NOT** work
+  * Upload (POST) works using HTML frontend
+  * List (PROPFIND) including subdirectories
+  * Rename (MOVE) - problems with filenames with space character still
+  * Delete (DELETE) - problems with filenames with space character still
 * TODO: Test CardDav, CalDAV, etc.
 * TODO: Set up submodule for [fruux/sabre-dav](https://github.com/fruux/sabre-dav) (current this is checked in)
 
