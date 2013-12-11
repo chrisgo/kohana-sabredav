@@ -18,51 +18,52 @@ Install
 
 * Download or clone and put into the /modules folder
 
-    `
-    application/
-    modules/
-      ...
-      kohana-sabredav/ (contents of this project)
-        init.php
-        classes/
-        config/
+```
+application/
+modules/
+  ...
+  kohana-sabredav/ (contents of this project)
+    init.php
+    classes/
+    config/
+    vendor/
+      SabreDAV-1.8.7/ (contents of sabre-dav project above)
+        bin/
+        build.xml
+        docs/
+        examples/
+        lib/
+          Sabre/
+            autoload.php
+            CalDAV/
+            CardDAV/
+            DAV/
+            DAVACL/
+            HTTP/
         vendor/
-          SabreDAV-1.8.7/ (contents of sabre-dav project above)
-            bin/
-            build.xml
-            docs/
-            examples/
-            lib/
-              Sabre/
-                autoload.php
-                CalDAV/
-                CardDAV/
-                DAV/
-                DAVACL/
-                HTTP/
-            vendor/
-              autoload.php
-              composer/
-              sabre/
-                 vobject/
-        views/
-      ...
-    system/
-    `
+          autoload.php
+          composer/
+          sabre/
+             vobject/
+    views/
+  ...
+system/
+```
 
 Configure
 ----
 
 * Enable in bootstrap.php
 
-   `
-   ...
-   Kohana::modules(array(
-     ...
-     'sabredav' => MODPATH.'kohana-sabredav',
-     ...
-     ));
-   `
+```
+...
+Kohana::modules(array(
+  ...
+    'sabredav' => MODPATH.'kohana-sabredav',
+    ...
+  ));
+  ...
+```
 
 * Copy /modules/kohana-sabredav/config/sabredav.php to /application/config/sabredav.php
 * Change some of the settings to point to a suitable folder
