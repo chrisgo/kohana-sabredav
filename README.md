@@ -6,7 +6,7 @@ Basic Kohana (3.3.1) module wrapping sabredav (1.8.7)
 * This is a work-in-progress
 * Only testing Webdav (for now) involving file transfer 
 * TODO: Test CardDav, CalDAV, etc.
-* TODO: Set up submodule for fruux/sabre-dav
+* TODO: Set up submodule for fruux/sabre-dav (current this is checked in)
 
 This module does the following basic things:
 
@@ -17,37 +17,36 @@ Install
 ----
 
 * Download or clone and put into the /modules folder
-* Download or clone https://github.com/fruux/sabre-dav and put into vendor inside the module
 
-    application
-    modules
+    application/
+    modules/
       ...
-      kohana-sabredav (contents of this project)
+      kohana-sabredav/ (contents of this project)
         init.php
-        classes
-        config
-        vendor
-          SabreDAV-1.8.7 (contents of sabre-dav project above)
-            bin
+        classes/
+        config/
+        vendor/
+          SabreDAV-1.8.7/ (contents of sabre-dav project above)
+            bin/
             build.xml
-            docs
-            examples
-            lib
-              Sabre
+            docs/
+            examples/
+            lib/
+              Sabre/
                 autoload.php
-                CalDAV
-                CardDAV
-                DAV
-                DAVACL
-                HTTP
-            vendor
+                CalDAV/
+                CardDAV/
+                DAV/
+                DAVACL/
+                HTTP/
+            vendor/
               autoload.php
-              composer
-              sabre
-                 vobject
-        views
+              composer/
+              sabre/
+                 vobject/
+        views/
       ...
-    system
+    system/
 
 
 Configure
@@ -76,6 +75,7 @@ pull up in a browser **http://example.com/webdav** (demo Route and Controller) a
   * Anonymous login
   * Host: http://example.com
   * Path: /webdav
+  
 
 
 
