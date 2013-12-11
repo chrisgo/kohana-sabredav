@@ -18,6 +18,7 @@ Install
 
 * Download or clone and put into the /modules folder
 
+    `
     application/
     modules/
       ...
@@ -47,19 +48,21 @@ Install
         views/
       ...
     system/
-
+    `
 
 Configure
 ----
 
 * Enable in bootstrap.php
 
+   `
    ...
    Kohana::modules(array(
      ...
      'sabredav' => MODPATH.'kohana-sabredav',
      ...
      ));
+   `
 
 * Copy /modules/kohana-sabredav/config/sabredav.php to /application/config/sabredav.php
 * Change some of the settings to point to a suitable folder
