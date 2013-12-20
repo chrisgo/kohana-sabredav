@@ -36,6 +36,10 @@ class Kohana_Controller_Webdav extends Controller
 		// $server->setBaseUri('/dav/server.php/'); // if you can't use mod_rewrite, use server.php as a base uri
 		// $server->setBaseUri('/'); // ideally, SabreDAV lives on a root directory with mod_rewrite sending every request to server.php
 		$server->setBaseUri($base_uri);
+
+		// Support for php://input being processed earlier
+		$kohana_plugin = new Plugin_Request_Put(Request::initial()->body());
+		$server->addPlugin($kohana_plugin);
 		
 		// The lock manager is reponsible for making sure users don't overwrite each others changes. Change 'data' to a different
 		// directory, if you're storing your data somewhere else.
