@@ -5,7 +5,7 @@ Basic Kohana (3.3.1) module wrapping sabredav (1.8.7)
 
 * This is a work-in-progress
 * Only testing Webdav (for now) involving file transfer (using CyberDuck client)
-  * Upload (PUT) - does **NOT** work
+  * Upload (PUT) - works now using plugin
   * Upload (POST) works using HTML frontend
   * List (PROPFIND) including subdirectories
   * Rename (MOVE) - problems with filenames with space character still
@@ -84,6 +84,26 @@ pull up in a browser **http://example.com/webdav** (demo Route and Controller) a
   * Anonymous login
   * Host: http://example.com
   * Path: /webdav
+
+Nginx Notes
+----
+
+A common optimization in Nginx is to cache static files using something like this
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|woff)(\?ver=[0-9.]+)?$ {
+        expires 30d;
+    }
+
+This will interfere with PUT (file upload) requests with those file extensions so you need to change it to specific folders only.  For example, all your static assets are under a folder called /media/
+
+    location /media/ {
+        location ~* \.(js|css|png|jpg|jpeg|gif|ico|woff)(\?ver=[0-9.]+)?$ {
+            expires 30d;
+        }
+    }
+    
+
+
   
 
 
