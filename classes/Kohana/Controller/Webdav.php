@@ -19,6 +19,13 @@ class Kohana_Controller_Webdav extends Controller
 		$root_dir = Kohana::$config->load('sabredav.webdav.root_directory');
 		$lock_file = Kohana::$config->load('sabredav.webdav.lock_file');
 
+		// *** Intercept PUTs so we can grab the php://input and try to pass
+		// *** that to Sabredav\HTTP\Request somehow ?????
+		if ("PUT" == $this->request->method())
+		{
+			$body = Request::initial()->body();
+		}
+
 		$root_directory = new DAV\FS\Directory($root_dir);
 		
 		// The server object is responsible for making sense out of the WebDAV protocol
