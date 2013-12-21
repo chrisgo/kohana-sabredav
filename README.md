@@ -5,11 +5,11 @@ Basic Kohana (3.3.1) module wrapping sabredav (1.8.7)
 
 * This is a work-in-progress
 * Only testing Webdav (for now) involving file transfer (using CyberDuck client)
-  * Upload (PUT) - works now using plugin
-  * Upload (POST) works using HTML frontend
-  * List (PROPFIND) including subdirectories
-  * Rename (MOVE) - problems with filenames with space character still
-  * Delete (DELETE) - problems with filenames with space character still
+  * Upload (PUT) 
+  * Upload (POST) 
+  * List (PROPFIND)
+  * Rename (MOVE) 
+  * Delete (DELETE)
 * Use Kohana Auth as a Authentication plugin (enable in config/sabredav.php)
 * Serve up one directory per user (appends username to root directory)
 * TODO: Test CardDav, CalDAV, etc.
