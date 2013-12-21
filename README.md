@@ -5,7 +5,7 @@ Basic Kohana (3.3.1) module wrapping sabredav (1.8.7)
 
 * This is a work-in-progress
 * Only testing Webdav (for now) involving file transfer (using CyberDuck client)
-  * Upload (PUT) 
+  * Upload (PUT) - *.php files still problematic
   * Upload (POST) 
   * List (PROPFIND)
   * Rename (MOVE) 
