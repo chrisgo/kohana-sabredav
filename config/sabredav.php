@@ -5,5 +5,10 @@ return array(
         'root_directory' => 'public',
         'lock_file' => 'data/locks',
         'base_uri' => '/webdav',
-    )
+    ),
+    'auth' => array(
+        'enable' => false,
+        'role' => 'login',
+        'realm' => 'kohana', 
+    ),
 );

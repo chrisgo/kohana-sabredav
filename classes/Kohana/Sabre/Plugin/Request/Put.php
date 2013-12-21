@@ -12,7 +12,7 @@ use Sabre\DAV;
  * 
  */
 
-class Plugin_Request_Put extends DAV\ServerPlugin {
+class Kohana_Sabre_Plugin_Request_Put extends DAV\ServerPlugin {
 
     /**
      * reference to server class
