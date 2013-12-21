@@ -57,7 +57,7 @@ class Kohana_Sabre_DAV_FS_Directory extends DAV\FS\Directory
     	if (!file_exists($path)) throw new DAV\Exception\NotFound('File with name ' . $path . ' could not be located');
     	if (is_dir($path)) 
     	{
-    		return new Directory($path);
+    		return new Sabre\DAV\FS\Directory($path);
     	} 
     	else 
     	{
