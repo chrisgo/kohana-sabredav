@@ -10,8 +10,8 @@ Basic Kohana (3.3.1) module wrapping sabredav (1.8.7)
   * List (PROPFIND) including subdirectories
   * Rename (MOVE) - problems with filenames with space character still
   * Delete (DELETE) - problems with filenames with space character still
-* TODO: Use Kohana Auth as a Authentication plugin 
-* TODO: Serve up one directory per user and not a public folder for all
+* Use Kohana Auth as a Authentication plugin (enable in config/sabredav.php)
+* Serve up one directory per user (appends username to root directory)
 * TODO: Test CardDav, CalDAV, etc.
 * TODO: Set up submodule for [fruux/sabre-dav](https://github.com/fruux/sabre-dav) (current this is checked in)
 
