@@ -14,6 +14,8 @@ Basic Kohana (3.3.1) module wrapping sabredav (1.8.7)
 * Serve up one directory per user (appends username to root directory)
 * TODO: Test CardDav, CalDAV, etc.
 * TODO: Set up submodule for [fruux/sabre-dav](https://github.com/fruux/sabre-dav) (current this is checked in)
+* TODO: Make stashing the Response HTTP Status into a plugin.  Currently, this is a **HACK** (edited Sabredav code) 
+in Sabre\HTTP\Response class to stash the status code in a member variable so we can get it later from Kohana.  Also stashing the body the same way (not used)
 
 This module does the following basic things:
 
@@ -103,6 +105,13 @@ This will interfere with PUT (file upload) requests with those file extensions s
             expires 30d;
         }
     }
+    
+Notes
+----
+
+* Had to create a Response class to include all the Webdav allowed HTTP Status codes
+* Had to implement a Lock Plugin specific to Kohana due to the php://input issue (same with PUT)
+
     
 
 
