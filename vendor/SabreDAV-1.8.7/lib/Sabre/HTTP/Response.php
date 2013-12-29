@@ -23,6 +23,10 @@ class Response {
      * @var string
      */
     public $defaultHttpVersion = '1.1';
+    
+    public $code;
+    
+    public $body;
 
     /**
      * Returns a full HTTP status message for an HTTP status code
@@ -109,6 +113,7 @@ class Response {
      */
     public function sendStatus($code) {
 
+    	$this->code = $code;
         if (!headers_sent())
             return header($this->getStatusMessage($code, $this->defaultHttpVersion));
         else return false;
@@ -158,7 +163,7 @@ class Response {
      * @return void
      */
     public function sendBody($body) {
-
+    	$this->body = $body;
         if (is_resource($body)) {
 
             fpassthru($body);

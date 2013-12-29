@@ -188,22 +188,20 @@ class Request {
      * @return resource
      */
     public function getBody($asString = false) {
-
-        if (is_null($this->body)) {
-            if (!is_null(self::$defaultInputStream)) {
-                $this->body = self::$defaultInputStream;
+    	if (is_null($this->body)) {
+        	if (!is_null(self::$defaultInputStream)) {
+        	    $this->body = self::$defaultInputStream;
             } else {
-                $this->body = fopen('php://input','r');
+        	    $this->body = fopen('php://input','r');
                 self::$defaultInputStream = $this->body;
             }
         }
         if ($asString) {
-            $body = stream_get_contents($this->body);
-            return $body;
+        	$body = stream_get_contents($this->body);
+        	return $body;
         } else {
             return $this->body;
         }
-
     }
 
     /**

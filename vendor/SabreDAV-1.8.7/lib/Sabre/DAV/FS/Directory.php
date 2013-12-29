@@ -37,10 +37,8 @@ class Directory extends Node implements DAV\ICollection, DAV\IQuota {
      * @return null|string
      */
     public function createFile($name, $data = null) {
-
-        $newPath = $this->path . '/' . $name;
+    	$newPath = $this->path . '/' . $name;
         file_put_contents($newPath,$data);
-
     }
 
     /**

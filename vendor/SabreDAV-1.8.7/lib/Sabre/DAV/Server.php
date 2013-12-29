@@ -798,10 +798,10 @@ class Server {
      * @return bool
      */
     protected function httpPut($uri) {
+    	
+		$body = $this->httpRequest->getBody();
 
-        $body = $this->httpRequest->getBody();
-
-        // Intercepting Content-Range
+    	// Intercepting Content-Range
         if ($this->httpRequest->getHeader('Content-Range')) {
             /**
             Content-Range is dangerous for PUT requests:  PUT per definition
@@ -828,10 +828,9 @@ class Server {
 
             throw new Exception\NotImplemented('PUT with Content-Range is not allowed.');
         }
-
+        
         // Intercepting the Finder problem
         if (($expected = $this->httpRequest->getHeader('X-Expected-Entity-Length')) && $expected > 0) {
-
             /**
             Many webservers will not cooperate well with Finder PUT requests,
             because it uses 'Chunked' transfer encoding for the request body.
@@ -870,39 +869,37 @@ class Server {
             $body = $newBody;
 
         }
-
+        
         if ($this->tree->nodeExists($uri)) {
-
             $node = $this->tree->getNodeForPath($uri);
-
+             
             // Checking If-None-Match and related headers.
             if (!$this->checkPreconditions()) return;
-
+            
             // If the node is a collection, we'll deny it
             if (!($node instanceof IFile)) throw new Exception\Conflict('PUT is not allowed on non-files.');
             if (!$this->broadcastEvent('beforeWriteContent',array($uri, $node, &$body))) return false;
-
+            
             $etag = $node->put($body);
-
+            
             $this->broadcastEvent('afterWriteContent',array($uri, $node));
-
+            
             $this->httpResponse->setHeader('Content-Length','0');
+            
             if ($etag) $this->httpResponse->setHeader('ETag',$etag);
+            
             $this->httpResponse->sendStatus(204);
-
+            
         } else {
-
-            $etag = null;
+        	$etag = null;
             // If we got here, the resource didn't exist yet.
             if (!$this->createFile($this->getRequestUri(),$body,$etag)) {
                 // For one reason or another the file was not created.
                 return;
             }
-
-            $this->httpResponse->setHeader('Content-Length','0');
+			$this->httpResponse->setHeader('Content-Length','0');
             if ($etag) $this->httpResponse->setHeader('ETag', $etag);
             $this->httpResponse->sendStatus(201);
-
         }
 
     }
@@ -1629,24 +1626,24 @@ class Server {
      * @return bool
      */
     public function createFile($uri,$data, &$etag = null) {
-
+		error_log("Server::createFile()");
         list($dir,$name) = URLUtil::splitPath($uri);
 
         if (!$this->broadcastEvent('beforeBind',array($uri))) return false;
 
         $parent = $this->tree->getNodeForPath($dir);
+        error_log("parent: ".$dir);
         if (!$parent instanceof ICollection) {
             throw new Exception\Conflict('Files can only be created as children of collections');
         }
 
         if (!$this->broadcastEvent('beforeCreateFile',array($uri, &$data, $parent))) return false;
-
+        
         $etag = $parent->createFile($name,$data);
         $this->tree->markDirty($dir . '/' . $name);
 
         $this->broadcastEvent('afterBind',array($uri));
         $this->broadcastEvent('afterCreateFile',array($uri, $parent));
-
         return true;
     }
 

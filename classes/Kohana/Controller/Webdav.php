@@ -5,6 +5,8 @@ use Sabre\DAV\Auth;
 
 class Kohana_Controller_Webdav extends Controller
 {
+	
+	public $http_status;
 
 	/**
 	 * Main index() function copied from sabre example
@@ -59,16 +61,16 @@ class Kohana_Controller_Webdav extends Controller
 		$browser = new DAV\Browser\Plugin();
 		$server->addPlugin($browser);
 		
-		// The lock manager is reponsible for making sure users don't overwrite each others changes. Change 'data' to a different
+		// The lock manager is reponsible for making sure users don't 
+		// overwrite each others changes. Change 'data' to a different
 		// directory, if you're storing your data somewhere else.
 		$lock_backend = new DAV\Locks\Backend\File($lock_file);
-		$lock_plugin = new DAV\Locks\Plugin($lock_backend);
-		
-		$server->addPlugin($lock_plugin);
+		$kohana_lock_plugin = new Kohana_Sabre_Plugin_Lock($lock_backend, Request::initial()->body());
+		$server->addPlugin($kohana_lock_plugin);
 		
 		// All we need to do now, is to fire up the server
 		$server->exec();
-		
+		$this->http_status = $server->httpResponse->code;
 	}
 	
 	/**
@@ -78,15 +80,9 @@ class Kohana_Controller_Webdav extends Controller
 	{
 		// Call the parent first
 		parent::after();
-		// Get the headers and check for WWW-Authenticate
-		foreach (headers_list() as $header)
-		{
-			if (strpos($header, 'WWW-Authenticate:') !== false)
-			{
-				$this->response->status(401);
-				break;
-			}
-		}
+		// We want to set the correct response code
+		$this->response->status($this->http_status);
+		//$this->response->body($this->http_body);
 	}
 
 }
